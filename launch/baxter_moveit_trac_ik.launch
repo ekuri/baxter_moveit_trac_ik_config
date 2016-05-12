@@ -1,0 +1,33 @@
+<launch>
+
+  <!--
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find baxter_end_effector_control)/marker.rviz"/>
+  -->
+
+  <include file="$(find baxter_moveit_trac_ik_config)/launch/baxter_moveit_trac_ik_config.launch" />
+
+  <node name="end_effector_marker_control"
+        pkg="baxter_end_effector_control"
+        type="end_effector_marker_control"
+        args="fix_state"
+        output="screen"/>
+
+  <node name="baxter_moveit_trac_ik"
+        pkg="baxter_moveit_trac_ik_config"
+        type="baxter_moveit_trac_ik"
+        respawn="false" output="screen">
+  </node>
+
+  <node name="baxter_moveit_trac_ik_keyboard_control"
+        pkg="baxter_moveit_trac_ik_config"
+        type="baxter_moveit_trac_ik_keyboard_control.py"
+        respawn="false" output="screen">
+  </node>
+
+  <node name="baxter_moveit_trac_ik_controller"
+        pkg="baxter_moveit_trac_ik_config"
+        type="baxter_moveit_trac_ik_controller"
+        respawn="false" output="screen">
+  </node>
+
+</launch>
